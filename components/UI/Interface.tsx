@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { Coins, Scroll, Terminal } from 'lucide-react';
+import { UserMenu } from './UserMenu';
 
 export const Interface: React.FC = () => {
   const balance = useGameStore((state) => state.balance);
@@ -27,8 +28,11 @@ export const Interface: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-slate-900/80 border border-slate-700 text-slate-100 px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm">
-           <h1 className="font-bold text-lg text-blue-400">COTI Realms <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded">PROTOTYPE</span></h1>
+        <div className="flex items-start gap-3">
+          <div className="bg-slate-900/80 border border-slate-700 text-slate-100 px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm">
+            <h1 className="font-bold text-lg text-blue-400">COTI Realms <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded">PROTOTYPE</span></h1>
+          </div>
+          <UserMenu />
         </div>
       </div>
 

@@ -8,6 +8,7 @@ export interface GameState {
   addLog: (message: string) => void;
   incrementBalance: (amount: number) => void;
   setConnected: (address: string) => void;
+  disconnect: () => void;
 }
 
 export interface PlayerState {

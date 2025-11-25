@@ -54,14 +54,14 @@ export const WalletConnect: React.FC = () => {
             <div className="flex-grow border-t border-slate-700"></div>
           </div>
 
-          <button
+          {/*<button
             onClick={handleGuestConnect}
             disabled={loading}
             className="w-full py-3 px-6 rounded-lg font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors flex items-center justify-center gap-2 text-sm"
           >
             <User size={16} />
             {loading ? "Loading..." : "Play as Guest (Dev Mode)"}
-          </button>
+          </button>*/}
           
           <div className="text-xs text-slate-500 mt-4 px-4 leading-relaxed">
             Mainnet ID: <span className="font-mono">2632500</span>. RainbowKit will automatically prompt to add the COTI network.
