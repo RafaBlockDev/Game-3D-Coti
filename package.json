@@ -9,20 +9,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@coti-io/coti-sdk-typescript": "^1.0.4",
+    "@rainbow-me/rainbowkit": "2.0.0",
+    "@react-three/drei": "9.88.0",
+    "@react-three/fiber": "8.13.0",
+    "@tanstack/react-query": "5.20.1",
+    "@vitejs/plugin-react": "4.2.1",
+    "ethers": "^6.15.0",
+    "lucide-react": "0.344.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "lucide-react": "0.344.0",
-    "@react-three/fiber": "8.13.0",
-    "zustand": "4.5.0",
     "three": "0.150.1",
-    "@react-three/drei": "9.88.0",
-    "ethers": "6.11.1",
-    "@vitejs/plugin-react": "4.2.1",
-    "vite": "5.1.4",
-    "@rainbow-me/rainbowkit": "2.0.0",
-    "wagmi": "2.5.7",
     "viem": "2.7.1",
-    "@tanstack/react-query": "5.20.1"
+    "vite": "5.1.4",
+    "wagmi": "2.5.7",
+    "zustand": "4.5.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -16,6 +16,7 @@ import { Interface } from './components/UI/Interface';
 import { Decor } from './components/World/Decor';
 import { Chest } from './components/Interactables/Chest';
 import { WalletConnect } from './components/UI/WalletConnect';
+import { Onboarding } from './components/UI/Onboarding';
 
 const queryClient = new QueryClient();
 
@@ -62,8 +63,9 @@ function SceneContent() {
 
 function GameRoot() {
   const isConnected = useGameStore((state) => state.isConnected);
+  const isOnboarded = useGameStore((state) => state.isOnboarded);
   const setConnected = useGameStore((state) => state.setConnected);
-  
+
   // Wagmi hooks
   const { address, isConnected: wagmiIsConnected } = useAccount();
 
@@ -79,6 +81,8 @@ function GameRoot() {
     <div className="relative w-full h-screen bg-slate-900 no-select">
       {!isConnected ? (
         <WalletConnect />
+      ) : !isOnboarded ? (
+        <Onboarding />
       ) : (
         <>
           <Canvas shadows camera={{ position: [10, 10, 10], fov: 40 }}>

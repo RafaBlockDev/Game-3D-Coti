@@ -5,10 +5,15 @@ export interface GameState {
   logs: string[];
   isConnected: boolean;
   walletAddress: string | null;
+  isOnboarded: boolean;
+  userKey: string | null;
   addLog: (message: string) => void;
   incrementBalance: (amount: number) => void;
   setConnected: (address: string) => void;
+  setOnboarded: (userKey: string) => void;
   disconnect: () => void;
+  resetGame: () => void;
+  clearUserKey: () => void;
 }
 
 export interface PlayerState {
