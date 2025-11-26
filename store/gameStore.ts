@@ -12,14 +12,16 @@ export const useGameStore = create<GlobalStore>((set) => ({
   walletAddress: null,
   isOnboarded: false,
   userKey: null,
+  isModalOpen: false,
 
   addLog: (message: string) => set((state) => ({ logs: [message, ...state.logs].slice(0, 5) })),
   incrementBalance: (amount: number) => set((state) => ({ balance: state.balance + amount })),
   setConnected: (address: string) => set({ isConnected: true, walletAddress: address }),
   setOnboarded: (userKey: string) => set({ isOnboarded: true, userKey }),
-  disconnect: () => set({ isConnected: false, walletAddress: null, balance: 0, logs: ["Welcome to COTI Realms. Please connect your wallet."], isOnboarded: false, userKey: null }),
+  disconnect: () => set({ isConnected: false, walletAddress: null, balance: 0, logs: ["Welcome to COTI Realms. Please connect your wallet."], isOnboarded: false, userKey: null, isModalOpen: false }),
   resetGame: () => set({ balance: 0, logs: ["System: Game reset."], position: new Vector3(0, 0, 0), target: new Vector3(0, 0, 0), isMoving: false }),
   clearUserKey: () => set({ isOnboarded: false, userKey: null }),
+  setModalOpen: (isOpen: boolean) => set({ isModalOpen: isOpen }),
 
   // Player Logic
   position: new Vector3(0, 0, 0),

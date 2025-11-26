@@ -7,6 +7,7 @@ export interface GameState {
   walletAddress: string | null;
   isOnboarded: boolean;
   userKey: string | null;
+  isModalOpen: boolean;
   addLog: (message: string) => void;
   incrementBalance: (amount: number) => void;
   setConnected: (address: string) => void;
@@ -14,6 +15,7 @@ export interface GameState {
   disconnect: () => void;
   resetGame: () => void;
   clearUserKey: () => void;
+  setModalOpen: (isOpen: boolean) => void;
 }
 
 export interface PlayerState {

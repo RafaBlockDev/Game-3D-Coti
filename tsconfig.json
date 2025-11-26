@@ -22,6 +22,9 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@coti-io/coti-ethers": [
+        "./lib/cotiEthersShim.ts"
       ]
     },
     "allowImportingTsExtensions": true,

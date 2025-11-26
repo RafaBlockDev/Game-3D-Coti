@@ -5,19 +5,20 @@ import * as THREE from 'three';
 
 export const Player: React.FC = () => {
   const meshRef = useRef<THREE.Group>(null);
-  
+
   const target = useGameStore((state) => state.target);
   const isMoving = useGameStore((state) => state.isMoving);
   const stopMoving = useGameStore((state) => state.stopMoving);
   const updatePosition = useGameStore((state) => state.updatePosition);
-  
+  const isModalOpen = useGameStore((state) => state.isModalOpen);
+
   const { camera } = useThree();
 
   useFrame((state, delta) => {
     if (!meshRef.current) return;
 
-    // Movement Logic
-    if (isMoving) {
+    // Movement Logic - Disabled when modal is open
+    if (isMoving && !isModalOpen) {
       const currentPos = meshRef.current.position;
       const distance = currentPos.distanceTo(target);
 
