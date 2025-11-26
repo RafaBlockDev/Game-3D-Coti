@@ -58,6 +58,11 @@ export const ChestRewardModal: React.FC<ChestRewardModalProps> = ({
     } else {
       setModalOpen(false);
     }
+
+    // Cleanup: ensure modal state is reset when component unmounts
+    return () => {
+      setModalOpen(false);
+    };
   }, [isOpen, resetState, setModalOpen]);
 
   const handleClaim = async () => {
@@ -78,6 +83,7 @@ export const ChestRewardModal: React.FC<ChestRewardModalProps> = ({
   const handleClose = () => {
     resetState();
     setClaimState('idle');
+    setModalOpen(false);
     onClose();
   };
 
@@ -90,8 +96,17 @@ export const ChestRewardModal: React.FC<ChestRewardModalProps> = ({
 
   return (
     <div
-      className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-auto"
       onClick={handleClose}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        height: '100vh'
+      }}
     >
       <div
         className="relative w-full max-w-md bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden"
