@@ -8,6 +8,7 @@ export interface GameState {
   isOnboarded: boolean;
   userKey: string | null;
   isModalOpen: boolean;
+  chestModal: ChestModalState;
   addLog: (message: string) => void;
   incrementBalance: (amount: number) => void;
   setConnected: (address: string) => void;
@@ -16,6 +17,8 @@ export interface GameState {
   resetGame: () => void;
   clearUserKey: () => void;
   setModalOpen: (isOpen: boolean) => void;
+  openChestModal: (rewardAmount: number, chestId: string) => void;
+  closeChestModal: () => void;
 }
 
 export interface PlayerState {
@@ -31,6 +34,12 @@ export interface ChestData {
   id: string;
   position: [number, number, number];
   isOpen: boolean;
+}
+
+export interface ChestModalState {
+  isOpen: boolean;
+  rewardAmount: number;
+  chestId: string;
 }
 
 export enum EntityType {

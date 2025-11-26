@@ -17,6 +17,7 @@ import { Decor } from './components/World/Decor';
 import { Chest } from './components/Interactables/Chest';
 import { WalletConnect } from './components/UI/WalletConnect';
 import { Onboarding } from './components/UI/Onboarding';
+import { ChestRewardModal } from './components/UI/ChestRewardModal';
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,8 @@ function GameRoot() {
   const isConnected = useGameStore((state) => state.isConnected);
   const isOnboarded = useGameStore((state) => state.isOnboarded);
   const setConnected = useGameStore((state) => state.setConnected);
+  const chestModal = useGameStore((state) => state.chestModal);
+  const closeChestModal = useGameStore((state) => state.closeChestModal);
 
   // Wagmi hooks
   const { address, isConnected: wagmiIsConnected } = useAccount();
@@ -93,6 +96,12 @@ function GameRoot() {
             <Stats className="!left-auto !right-0" />
           </Canvas>
           <Interface />
+          <ChestRewardModal
+            isOpen={chestModal.isOpen}
+            onClose={closeChestModal}
+            rewardAmount={chestModal.rewardAmount}
+            chestId={chestModal.chestId || 'Unknown'}
+          />
         </>
       )}
     </div>

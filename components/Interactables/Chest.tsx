@@ -3,7 +3,6 @@ import { useFrame } from '@react-three/fiber';
 import { useGameStore } from '../../store/gameStore';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
-import { ChestRewardModal } from '../UI/ChestRewardModal';
 
 interface ChestProps {
   id: string;
@@ -13,14 +12,13 @@ interface ChestProps {
 export const Chest: React.FC<ChestProps> = ({ id, position }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [showRewardModal, setShowRewardModal] = useState(false);
-  const [rewardAmount, setRewardAmount] = useState(0);
 
   const groupRef = useRef<THREE.Group>(null);
   const lidRef = useRef<THREE.Mesh>(null);
 
   const playerPosition = useGameStore((state) => state.position);
   const addLog = useGameStore((state) => state.addLog);
+  const openChestModal = useGameStore((state) => state.openChestModal);
 
   useFrame((state, delta) => {
     // Floating animation when hovered/idle
@@ -52,10 +50,7 @@ export const Chest: React.FC<ChestProps> = ({ id, position }) => {
 
     // Generate random reward amount (10-50 tokens)
     const reward = Math.floor(Math.random() * 41) + 10;
-    setRewardAmount(reward);
-
-    // Show reward modal
-    setShowRewardModal(true);
+    openChestModal(reward, id);
   };
 
   return (
@@ -90,18 +85,6 @@ export const Chest: React.FC<ChestProps> = ({ id, position }) => {
              <div className="bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap pointer-events-none">
                Click to Open
              </div>
-          </Html>
-        )}
-
-        {/* Reward Modal Portal */}
-        {showRewardModal && (
-          <Html fullscreen>
-            <ChestRewardModal
-              isOpen={showRewardModal}
-              onClose={() => setShowRewardModal(false)}
-              rewardAmount={rewardAmount}
-              chestId={id}
-            />
           </Html>
         )}
       </group>

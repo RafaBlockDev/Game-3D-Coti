@@ -2,6 +2,12 @@ import { create } from 'zustand';
 import { Vector3 } from 'three';
 import { GameState, PlayerState } from '../types';
 
+const createChestModalState = () => ({
+  isOpen: false,
+  rewardAmount: 0,
+  chestId: '',
+});
+
 interface GlobalStore extends GameState, PlayerState {}
 
 export const useGameStore = create<GlobalStore>((set) => ({
@@ -13,15 +19,36 @@ export const useGameStore = create<GlobalStore>((set) => ({
   isOnboarded: false,
   userKey: null,
   isModalOpen: false,
+  chestModal: createChestModalState(),
 
   addLog: (message: string) => set((state) => ({ logs: [message, ...state.logs].slice(0, 5) })),
   incrementBalance: (amount: number) => set((state) => ({ balance: state.balance + amount })),
   setConnected: (address: string) => set({ isConnected: true, walletAddress: address }),
   setOnboarded: (userKey: string) => set({ isOnboarded: true, userKey }),
-  disconnect: () => set({ isConnected: false, walletAddress: null, balance: 0, logs: ["Welcome to COTI Realms. Please connect your wallet."], isOnboarded: false, userKey: null, isModalOpen: false }),
-  resetGame: () => set({ balance: 0, logs: ["System: Game reset."], position: new Vector3(0, 0, 0), target: new Vector3(0, 0, 0), isMoving: false }),
+  disconnect: () => set({
+    isConnected: false,
+    walletAddress: null,
+    balance: 0,
+    logs: ["Welcome to COTI Realms. Please connect your wallet."],
+    isOnboarded: false,
+    userKey: null,
+    isModalOpen: false,
+    chestModal: createChestModalState(),
+  }),
+  resetGame: () => set({
+    balance: 0,
+    logs: ["System: Game reset."],
+    position: new Vector3(0, 0, 0),
+    target: new Vector3(0, 0, 0),
+    isMoving: false,
+    chestModal: createChestModalState(),
+  }),
   clearUserKey: () => set({ isOnboarded: false, userKey: null }),
   setModalOpen: (isOpen: boolean) => set({ isModalOpen: isOpen }),
+  openChestModal: (rewardAmount: number, chestId: string) =>
+    set({ chestModal: { isOpen: true, rewardAmount, chestId } }),
+  closeChestModal: () =>
+    set({ chestModal: createChestModalState() }),
 
   // Player Logic
   position: new Vector3(0, 0, 0),
